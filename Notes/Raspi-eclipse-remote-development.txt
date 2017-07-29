@@ -1,0 +1,23 @@
+Eclipse + rpi + python + wifi
+1. Pobierz http://www.eclipse.org/downloads/
+2. Rozpakuj pobrany plik
+3. Przejdź do rozpakowanego folderu
+4. Uruchom plik "eclipse-inst"
+5. Zainstaluj Eclipse IDE for C/C++ developers
+6. Uruchom zainstalowane eclipse
+7. Wybierz workspace (np. ~/Workspace/PiDev).
+8. Zatwierdź.
+9. W eclipsie odpal menu "help" -> "Install new Software"
+10. W pole "work with:" wklej http://www.pydev.org/updates
+11. Enter
+12. Zaznacz "PyDev"
+13. Next
+14. Next
+16. Przeczytaj i zaakceptuj licencję,
+17. Finish
+# W prawy dolnym rogu okna eclipse pojawi się indykator pracy
+18. "install anyway"
+19. W oknie "Do you trust these certificates?" zaznacz jedyną pozycję
+20. Kliknij "Accept selected"
+21. Zaakceptuj restart eclipse
+
