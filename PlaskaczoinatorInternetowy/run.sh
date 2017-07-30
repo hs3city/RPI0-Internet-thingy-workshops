@@ -13,6 +13,7 @@ set -u
 #
 echo "INFO|$(date)|Wczytuje konfiguracje"
 source ./config.sh
+chmod +x ./*.sh
 #
 # Upewnij sie ze mamy dobry adres oraz ze pi jest dostepne w sieci
 #
@@ -24,8 +25,9 @@ ping -c 1 -W 1 "$PI_HOST" || echo "ERROR|$(date)|Nie udalo sie odnalezc malinki"
 #
 
 echo "INFO|$(date)|Czyszcze srodowisko docelowe"
-sshpass -p "$PI_PASS" ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "$PI_USER""@""$PI_HOST"  'echo "'"$PI_PASS"'" | sudo -S killall flask || exit 0' > /dev/null
-sshpass -p "$PI_PASS" ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "$PI_USER""@""$PI_HOST"  'echo "'"$PI_PASS"'" | sudo -S killall python || exit 0' > /dev/null
+sshpass -p "$PI_PASS" scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -r "$LOCAL_PROJECT_PATH"/config.sh "$PI_USER""@""$PI_HOST"":""$TARGET_FOLDER" > /dev/null
+sshpass -p "$PI_PASS" scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -r "$LOCAL_PROJECT_PATH"/stop_flask.sh "$PI_USER""@""$PI_HOST"":""$TARGET_FOLDER" > /dev/null
+sshpass -p "$PI_PASS" ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "$PI_USER""@""$PI_HOST"  'cd '"$TARGET_FOLDER"' && echo "'"$PI_PASS"'" | sudo -S ./stop_flask.sh || exit 0' > /dev/null
 sshpass -p "$PI_PASS" ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "$PI_USER""@""$PI_HOST"  'echo "'"$PI_PASS"'" | sudo -S rm -rf '"$TARGET_FOLDER"' || exit 0' > /dev/null
 sshpass -p "$PI_PASS" ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "$PI_USER""@""$PI_HOST"  'mkdir '"$TARGET_FOLDER"'' > /dev/null
 #
