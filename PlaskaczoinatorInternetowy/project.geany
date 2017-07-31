@@ -28,14 +28,7 @@ long_line_behaviour=1
 long_line_column=80
 
 [files]
-current_page=4
-FILE_NAME_0=281;Sh;0;EUTF-8;0;1;0;%2Fhome%2Fmroz%2FWorkspace%2FRPI0-Internet-thingy-workshops%2FPlaskaczoinatorInternetowy%2Frun.sh;0;2
-FILE_NAME_1=382;Sh;0;EUTF-8;0;1;0;%2Fhome%2Fmroz%2FWorkspace%2FRPI0-Internet-thingy-workshops%2FPlaskaczoinatorInternetowy%2Frun_flask.sh;0;2
-FILE_NAME_2=284;Sh;0;EUTF-8;0;1;0;%2Fhome%2Fmroz%2FWorkspace%2FRPI0-Internet-thingy-workshops%2FPlaskaczoinatorInternetowy%2Fconfig.sh;0;2
-FILE_NAME_3=1326;Python;0;EUTF-8;0;1;0;%2Fhome%2Fmroz%2FWorkspace%2FRPI0-Internet-thingy-workshops%2FPlaskaczoinatorInternetowy%2Fplaskaczoinator.py;0;2
-FILE_NAME_4=470;Sh;0;EUTF-8;0;1;0;%2Fhome%2Fmroz%2FWorkspace%2FRPI0-Internet-thingy-workshops%2FPlaskaczoinatorInternetowy%2Fstop_flask.sh;0;2
-FILE_NAME_5=111;CSS;0;EUTF-8;0;1;0;%2Fhome%2Fmroz%2FWorkspace%2FRPI0-Internet-thingy-workshops%2FPlaskaczoinatorInternetowy%2Fstatic%2Fstyle.css;0;2
-FILE_NAME_6=259;Javascript;0;EUTF-8;0;1;0;%2Fhome%2Fmroz%2FWorkspace%2FRPI0-Internet-thingy-workshops%2FPlaskaczoinatorInternetowy%2Fstatic%2Fscript.js;0;2
+current_page=-1
 
 [VTE]
 last_dir=/home/mroz/Workspace/RPI0-Internet-thingy-workshops/PlaskaczoinatorInternetowy
