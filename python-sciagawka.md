@@ -18,13 +18,15 @@ Absolutne podstawy
 ----------------
 
 
-| Polecenie         | opis                                              | wynik dzialania na ekranie konsoli           |
-| :------------ --- |:-------------------------------------------------:|---------------------------------:|
-| print(<wartość>)  | wydrukuj na ekranie <wartość>                     | <wartość>                            |
-| x=<wartość>       | zapisz do zmiennej x wartosc <wartość>            | BRAK                    |
-| x="tekst"         | zapisz do zmiennej x ciąg znaków "telkst "        | BRAK            |
-| y=x+1             | dodaj 1 do zmiennej x a wynik zapisz w zmiennej x | BRAK
-
+| Polecenie                         | opis                                                      | wynik dzialania na ekranie konsoli           |
+| :------------ ---                 |:---------------------------------------------------------:|---------------------------------:|
+| print(<wartość>)                  | wydrukuj na ekranie <wartość>                             | <wartość>                            |
+| x=<wartość>                       | zapisz do zmiennej x wartosc <wartość>                    | BRAK                    |
+| x="tekst"                         | zapisz do zmiennej x ciąg znaków "telkst "                | BRAK            |
+| y=x+1                             | dodaj 1 do zmiennej x a wynik zapisz w zmiennej x         | BRAK
+| foo()                             | wywołaj funkcję foo                                       | ZALEŻY OD FUNKCJI FOO |
+| foo(<wartość>, <wartość> , <...>) | wywołaj funkcję foo z zadanymi argumentami                | ZALEŻY OD FUNKCJI FOO |
+| foo() + bar(<wartość>)            | dodaj do siebie wartości zwracane przez funkcje foo i bar | ZALEŻY OD FUNKCJI FOO i BAR |
 ###<wartość>
 Jest to dowolne wyrażenie zwracające jakąś wartość - może to być jawnie wpisana wartosć stała (patrz niżej) lub wywołanie funkcji.
 
@@ -96,13 +98,16 @@ def <nazwa>( <argumenty> ):
   return <wartość>
 ```
 
-Czyli np.
+Czyli np. (wypisze w konsoli 4.5):
 
 ```python
 def dodaj(x, y):
   z = x+y
   return z
+
+print( dodaj(1, 3.5) )
 ```
+
 
 Zewnętrzne biblioteki
 ----------------
@@ -136,6 +141,10 @@ print(glob("*.py"))
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 ```
+
+Przydatne biblioteki
+----------------
+1. time : zawiera funkcje takie jak `time` - zwraca aktualny czas w sekundach od "unix epoch" oraz `sleep`, która usypia program na zadaną liczbę sekund
 
 Dekoratory
 ----------------
