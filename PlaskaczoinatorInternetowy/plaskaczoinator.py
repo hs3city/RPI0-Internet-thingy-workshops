@@ -61,12 +61,13 @@ def plask():
   GPIO.setup(18, GPIO.OUT)
   servo = GPIO.PWM(18, 100)
   servo.start(5.0)
+  sleep(0.5)
   # plaskacz!
   app.logger.info("plask start" + repr(servo))
   servo.ChangeDutyCycle(20.0)
-  sleep(2)
+  sleep(1)
   servo.ChangeDutyCycle(5.0)
-  sleep(2)
+  sleep(1)
   app.logger.info("plask stop")
   servo.stop()
   # skonczylismy, dajmy znac ze serwo jest wolne

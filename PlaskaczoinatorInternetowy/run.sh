@@ -19,7 +19,7 @@ chmod +x ./*.sh
 #
 
 echo "INFO|$(date)|Sprawdzam czy docelowa malinka jest w sieci"
-ping -c 1 -W 1 "$PI_HOST" || echo "ERROR|$(date)|Nie udalo sie odnalezc malinki"
+ping -c 1 -W 1 "$PI_HOST" || (echo "ERROR|$(date)|Nie udalo sie odnalezc malinki" && exit 1)
 #
 # Zabij flaska i usun stare pliki
 #
