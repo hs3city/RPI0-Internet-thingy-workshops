@@ -7,7 +7,8 @@ Witaj świecie
 Stwórz plik 'hello.py'
 
 ```python
-from flask import Flask
+from flask import Flask, request, send_from_directory, url_for
+import logging
 app = Flask(__name__)
 
 @app.route('/')
