@@ -39,16 +39,16 @@ Przykłady wartości:
 Logika
 ----------------
 
-###Wartości logiczne
+### Wartości logiczne
 Python definiuje dwie podstawowe wartości logiczne: `True`, `False`.
 
 Wartości równoważne logicznemu fałszowi `None`, `0`, `[]` (pusta lista), `{}` (pusty słownik) itd.
 Wartości równoważne logicznej prawdzie: `1`, `"dowolny niepusty ciąg znaków"`, `['dowolna', 'niepusta', 'lista']`, `{'dowolny':'niepusty słownik'}`
 
-###Instrukcje sterujące
+### Instrukcje sterujące
 Jest to zestaw instrukcji, które w zależności od logicznej wartości <warunek> wykonują, lub nie <operację>
 
-####Jeżeli (if, elif, else)
+#### Jeżeli (if, elif, else)
 
 Instukcja sprawdza <warunek>, jeśli warunek zwraca wartość logiczną `True` wykonuje <operacje> w przeciwnym wypadku przechodzi do następnej opcjonalnej sekcji `elif`, sprawdza <warunekN> i w zależności od wartości warunku wykonuje <operacjeN> albo przechodzi dalej. W końcu, jeśli wszystkie warunki były fałszywe zostaje wyknany blok `else`.
 
@@ -65,7 +65,7 @@ else:
   <operacje5>
 ```
 
-####Pętla (while)
+#### Pętla (while)
 
 ```python
 while <warunek>:
@@ -73,7 +73,7 @@ while <warunek>:
 ```
 Instukcja powoduje cykliczne wykonywanie `<operacje>` za każdym razem sprawdzając czy `<warunek>` zwraca wartość `True`. W momencie, w którym warunek przestaje zwracać logiczną prawdę, pętla się kończy.
 
-####Iteracje (for)
+#### Iteracje (for)
 <sekwencja> - pewna instrukcja zwracająca sekwencję - np. lista `[]`, słownik, ciąg znaków, a najczęściej `range(<from>,[<to>[, <step>]])` np. `range(10)`, `range(1,100,2)` - czyli odpowiednio: liczby całkowite od 0 do 9 włącznie, liczby parzyste od 1 do 99;
 
 ```python
