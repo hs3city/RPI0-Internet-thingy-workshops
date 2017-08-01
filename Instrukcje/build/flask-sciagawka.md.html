@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+<h1 id="flask---moja-pierwsza-ściągawka">Flask - moja pierwsza ściągawka</h1>
+<p>Flask jest frameworkiem w python służącym do tworzenia aplikacji internetowych. Sam z siebie nie narzuca żadnej struktury programu (z drobnymi wyjątkami), sam z siebie zapewnia tylko podstawową funkcjonalność, która w razie potrzebymoże być uzupełniana za pomocą zewnętrznych wtyczek - np. dla baz danych, enkoderów, dekoderów itd.</p>
+<h2 id="witaj-świecie">Witaj świecie</h2>
+<p>Stwórz plik 'hello.py'</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> flask <span class="im">import</span> Flask, request, send_from_directory
+<span class="im">import</span> json
+
+<span class="co">#</span>
+<span class="co"># Stworz obiekt aplikacji</span>
+<span class="co">#</span>
+app <span class="op">=</span> Flask(<span class="va">__name__</span>)
+
+<span class="at">@app.route</span>(<span class="st">&#39;/&#39;</span>)
+<span class="kw">def</span> hello():
+  <span class="cf">return</span> <span class="st">&quot;Hello world&quot;</span>
+
+<span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&#39;__main__&#39;</span>:
+<span class="co">#</span>
+<span class="co"># uruchom aplikacje</span>
+<span class="co">#</span>
+  app.run(host<span class="op">=</span><span class="st">&#39;0.0.0.0&#39;</span>, port<span class="op">=</span><span class="dv">5000</span>, debug<span class="op">=</span><span class="va">True</span>)</code></pre></div>
+<p>taki program można uruchomić w trybie developerskim za pomocą polecenia:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">python</span> ./flask_przyklad.py</code></pre></div>
+<h2 id="serwowanie-plików-statycznych-grafiki-itp.">Serwowanie plików statycznych (grafiki itp.)</h2>
+<p>Jeśli w projekcie mamy folder 'static' to pliki z tego folderu można udostępnić w następujący sposób:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="at">@app.route</span>(<span class="st">&#39;/static/&lt;path:path&gt;&#39;</span>)
+<span class="kw">def</span> static_handler(path):
+    <span class="co">&quot;&quot;&quot;</span>
+<span class="co">    Uchwyt serwujacy uzytkownikowi pliki statyczne z folderu &#39;statitc&#39;</span>
+<span class="co">    :param path: nazwa pliku</span>
+<span class="co">    :return: zawartosc pliku</span>
+<span class="co">    &quot;&quot;&quot;</span>
+    <span class="cf">return</span> send_from_directory(<span class="st">&#39;static&#39;</span>, path)</code></pre></div>
+<p>Pliki te będą dostępne pod adresem &quot;http://<nazwa malinki>.local/static/jakis_plik.jpg</p>
+<h2 id="serwowanie-favicon--ikonki-wyświetlanej-w-pasku-adresu-przeglądarki">Serwowanie favicon -ikonki wyświetlanej w pasku adresu przeglądarki</h2>
+<p>Zakładając że w projekcie znajduje się folder 'static' zawierający plik 'favicon.ico'</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="at">@app.route</span>(<span class="st">&#39;/favicon.ico&#39;</span>)
+<span class="kw">def</span> favicon():
+    <span class="co">&quot;&quot;&quot;Uchwyt serwuje favicon = czyli mala grafike wyswietlana na pasku</span>
+<span class="co">    przgladarki&quot;&quot;&quot;</span>
+    <span class="cf">return</span> send_from_directory(<span class="st">&#39;static&#39;</span>, <span class="st">&#39;favicon.ico&#39;</span>, mimetype<span class="op">=</span><span class="st">&#39;image/vnd.microsoft.icon&#39;</span>)</code></pre></div>
+<h2 id="przyjmowanie-zapytań-post-z-json---słownik">Przyjmowanie zapytań POST z JSON - słownik</h2>
+<p>Zakładając że użytkownik wyśle dokument JSON <code>{&quot;pole1&quot;:&quot;wartosc1&quot;, &quot;pole2&quot;:3}</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> flask <span class="im">import</span> request
+
+<span class="at">@app.route</span>(<span class="st">&quot;/akcja&quot;</span>, methods<span class="op">=</span>[<span class="st">&#39;POST&#39;</span>])
+<span class="kw">def</span> update_matrix():
+    <span class="co"># Zaloguj co tam nam uzytkownik przeslal</span>
+    app.logger.info(<span class="bu">str</span>(request.get_data()))
+    data <span class="op">=</span> request.get_json(force<span class="op">=</span><span class="va">True</span>)
+    pole1 <span class="op">=</span> data[<span class="st">&#39;pole1&#39;</span>]
+    pole2 <span class="op">=</span> data[<span class="st">&#39;pole2&#39;</span>]
+    <span class="cf">return</span> <span class="st">&quot;&quot;&quot;{&quot;status&quot;:&quot;OK&quot;}&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="przyjmowanie-zapytań-post-z-json---tablice">Przyjmowanie zapytań POST z JSON - tablice</h2>
+<p>Zakładając że użytkownik wyśle dokument JSON <code>[123, 5, 42]</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> flask <span class="im">import</span> request
+
+<span class="at">@app.route</span>(<span class="st">&quot;/akcja&quot;</span>, methods<span class="op">=</span>[<span class="st">&#39;POST&#39;</span>])
+<span class="kw">def</span> update_matrix():
+    <span class="co"># Zaloguj co tam nam uzytkownik przeslal</span>
+    app.logger.info(<span class="bu">str</span>(request.get_data()))
+    data <span class="op">=</span> request.get_json(force<span class="op">=</span><span class="va">True</span>)
+    a <span class="op">=</span> data[<span class="dv">0</span>]
+    b <span class="op">=</span> data[<span class="dv">1</span>]
+    c <span class="op">=</span> data[<span class="dv">2</span>]
+    <span class="cf">return</span> <span class="st">&quot;&quot;&quot;{&quot;status&quot;:&quot;OK&quot;}&quot;&quot;&quot;</span></code></pre></div>
+<p>zmienne <code>a</code>, <code>b</code>, <code>c</code> będą teraz zawierać odpowiednia: 123, 5, 42.</p>
+<h2 id="zwracanie-dokumantów-json-do-użytkownika">Zwracanie dokumantów JSON do użytkownika</h2>
+<p>Jeśli chcemy zwrócić użytkonikowi zawartość zmiennej <code>state</code> pod postacią dokumentu JSON należy:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> json
+
+state <span class="op">=</span> [
+  [ <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>],
+  [ <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],
+  [ <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>],
+  [ <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],
+]
+
+<span class="at">@app.route</span>(<span class="st">&quot;/state.json&quot;</span>)
+<span class="kw">def</span> get_state():
+  <span class="kw">global</span> state
+  <span class="cf">return</span> json.dumps(state)</code></pre></div>
+</body>
+</html>

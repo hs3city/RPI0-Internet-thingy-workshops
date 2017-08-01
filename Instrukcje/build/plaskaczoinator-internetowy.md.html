@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+<h1 id="plaskaczoinator-internetowy">Plaskaczoinator internetowy</h1>
+<h2 id="instrukcja-do-warsztatów">Instrukcja do warsztatów</h2>
+<hr />
+<h2 id="wstęp">Wstęp</h2>
+<p>Celem warsztatu jest stworzenie urządzenia służącego do sprzedawania plaskaczy przez internet. Plaskacze będą dalej zwane &quot;Bat slapami&quot;. Punktem wyjściowym projektu jest projekt wstępny stworzony na podstawie instrukcji ogólnej.</p>
+<p>Plaskaczoinator składa się z czterech elementów: 1. Serwa z doczepioną ręką 2. Malinki 3. Aplikacji napisanej w Python z wykorzystaniem biblioteki flask 4. Strony internetowej, która jest przgotowana i przechowywana w folderach &quot;static&quot; oraz &quot;templates&quot; w folderze &quot;PlaskaczoinatorInternetowy&quot;</p>
+<h2 id="obsługa-serwomechanizmu-w-raspberry-pi">Obsługa serwomechanizmu w raspberry pi</h2>
+<p>Serwomechanizmy to układy elektromechaniczne składające się z silnika, kilku zębatek oraz pętli sprzężenia zwrotnego, spełniające jedno proste zadanie - w zależności od zadanego sygnału wychylają swój wał o x stopni.</p>
+<p>Sygnałem sterującym jest sygnał PWM - czyli cykliczny sygnał prostokątny o sterowanym współczynniku wypełnienia (stosunek czasu w którym sygnał przyjmuje stan wysoki, do czasu w którym przyjmuje stan niski). Z naszego punktu widzenia jest ważne tylko to, że zwiększając współczynnik wypełnienia powodujemy że serwo wychyla się bardziej.</p>
+<p>Stosunek wypełnienia sygnału sterującego serwami zazwyczaj oscyluje pomiędzy 5%, a 20% co odpowiednio powoduje wychylenie serwa na poziomie od 0 do 90 stopni.</p>
+<p>Sposób podłączenia: Serwo potrzebuje trzech przewodów: 1. Pomarańczowy - sygnał sterujący podłączany do GPIO raspberry pi za pośrednictwem rezystora 1 kOhm. 2. Czerwony - zasilanie 5 V 3. Brązowy - Masa &quot;GND&quot;</p>
+<h3 id="zadane-1">Zadane 1</h3>
+<p>Wykorzystując rezystor, płytkę stykową oraz dodatkowe kable do płytki stykowej podłącz serwo do raspberry pi wykorzystując pin 18 (zapamiętaj ten numer) <a href="http://www.extremeelectronics.co.uk/wp-content/uploads/2015/12/pizeropinout.jpg">Opis wyprowadzeń Raspberry Pi</a></p>
+<h3 id="obsługa-serwo-z-poziomu-python">Obsługa serwo z poziomu python</h3>
+<p>Obsługę serwa trzeba zacząć od zaimportowania niezbędnych bibliotek oraz inicjalizacji odpowiedniego pinu w trybie PWM:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> time <span class="im">import</span> sleep
+<span class="im">import</span> RPi.GPIO <span class="im">as</span> GPIO
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(<span class="dv">18</span>, GPIO.OUT)
+servo <span class="op">=</span> GPIO.PWM(<span class="dv">18</span>, <span class="dv">100</span>)</code></pre></div>
+<p>Następnie trzeba wystartować serwo i ustawić je w pozycji zerowej (czyli ustawić współczynnik wypełnienia na 5%):</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">servo.start(<span class="fl">5.0</span>)</code></pre></div>
+<p>Użytkowanie serwa polega na zadawaniu mu sygnału o odpowiednim współczynniku wypełnienia - np. żeby wychylić je o 90 stopni należy zadać sygnał PWM o wypełnieniu 20%:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">servo.ChangeDutyCycle(<span class="fl">20.0</span>)</code></pre></div>
+<p>Zaś żeby wrócić do pozycji początkowej należy zadać sygnał o współczynniku wypełnienia 5%:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">servo.ChangeDutyCycle(<span class="fl">5.0</span>)</code></pre></div>
+<p>Na koniec należy wyłączyć sygnał PWM sterujący serwem:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">  servo.stop()</code></pre></div>
+<h3 id="zadanie-2">Zadanie 2</h3>
+<p>Przekopiuj poniższy kod na koniec swojego pliku:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#</span>
+<span class="co"># Ta zmienna informuje czy</span>
+<span class="co">#</span>
+servo_is_working <span class="op">=</span> <span class="va">False</span>
+
+<span class="at">@app.route</span>(<span class="st">&#39;/plask&#39;</span>)
+<span class="kw">def</span> plask():
+  <span class="co">&quot;&quot;&quot;Uchwyt odpowiedzialny za sprzedawanie plaskacza!&quot;&quot;&quot;</span>
+  <span class="co"># prostu mechanizm upewniajacy sie ze w danym momencie tylko jedna osoba</span>
+  <span class="co"># kozysta z serwa</span>
+  <span class="kw">global</span> servo_is_working
+  <span class="cf">if</span> servo_is_working:
+    <span class="cf">return</span> <span class="st">&quot;ERR&quot;</span>
+  servo_is_working <span class="op">=</span> <span class="va">True</span>
+
+  <span class="co">#</span>
+  <span class="co"># TUTAJ wstaw kod sterujący serwem - inicjalizację, plaskanie i wyłączenie sygnału sterującego</span>
+  <span class="co">#</span>
+
+  <span class="co"># skonczylismy, dajmy znac ze serwo jest wolne</span>
+  servo_is_working <span class="op">=</span> <span class="va">False</span>
+  <span class="cf">return</span> <span class="st">&quot;OK&quot;</span>
+</code></pre></div>
+<p>Jest to szablon funkcji, która wykorzystuje zmienną <code>servo_is_working</code> do upewnienia się że dwójka urzytkowników nie korzysta z serwa naraz. Nie jest to rozwiązanie idealne, ale działa.</p>
+<p>sekcję <code>TUTAJ wstaw kod sterujący serwem</code> podmień kodem który: 1. Zainicjuje serwo (pamiętaj o odpowiednim pinie oraz pozycji początkowej) 2. Odczeka sekundę aż serwo się zainicjuje (patrz ściągawka python - czas) 3. wychyli się na maksa (sprzeda płaskiego) 4. odczeka sekunde aż płaski się sprzeda 5. Ustawi serwo w pozycji początkowej 6. Zwolni pin kontrolujący serwo</p>
+<p>Do testowania postępów możesz wykorzystać przeglądarkę wchodząc na adres <code>http://&lt;nazwa malinki&gt;.local/plask</code> i obserwacje konsoli.</p>
+</body>
+</html>

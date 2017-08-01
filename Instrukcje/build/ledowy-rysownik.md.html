@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+<h1 id="warsztaty-z-wichajstrów-internetowych">Warsztaty z wichajstrów internetowych</h1>
+<h2 id="ledowy-rysownik-internetowy">Ledowy rysownik internetowy</h2>
+<p>Wieloosobowa gra internetowa polegająca na rysowaniu dowolnych, wybranych przez użytkownika wzorów. Przestrzeń jest ograniczona, rysować można tylko z określoną prędkością, a tego inni chcą narysować co innego, niektórzy to poprostu trolle, a co najgorsze, nie wszyscy muszą grać uczciwie!</p>
+<hr />
+<h2 id="cel">Cel</h2>
+<p>Celem warsztatu jest wykorzystanie modułu macierzy led 8x16 pikseli oraz malinki do stworzenia gry internetowej w kótrej: 1. każdy, kto odwiedzi stronę malinki może zapalić albo zgasić jeden piksel 2. Przed zapaleniem/zgaszeniem każdego następnego piksela trzeba odczekać 10 sekund (no chyba że jesteś hackerem)</p>
+<h2 id="opis-matrycy-led-oraz-podłączenie">Opis matrycy LED oraz podłączenie</h2>
+<p>Wykorzystana matryca LED to gotowy moduł zaprojektowany specjalnie z myślą o raspberry pi. Zawiera dwie macierze 8x8 led. sterowane przez interfejs SPI (możesz olać tą informację) za pośrednictwem dwóch stwrowników led MAX7219 (ta informacja też nie jest dla Ciebie zbyt ważna).</p>
+<p>Matryce led do raspberry pi podłącza się do 4-sto pinowego GPIO, zaczynając od pinu 1 (w pobliżu gnizda miniHDMI).</p>
+<p>Do wykorzystania wyświetlacza na malince konieczna jest biblioteka Luma.LED_Matrix na licencji MIT, która jest preinstalowana na warsztatowych urządzeniach.</p>
+<h2 id="programowanie-matrycy">Programowanie matrycy</h2>
+<p>Jako że warsztaty mają być szybkie, zaczniemy nieco oszukując.</p>
+<ol style="list-style-type: decimal">
+<li>(60 s) Z folderu <code>/home/mroz/RPI0-Internet-thingy-workshops/LedowyRysownik</code> przekopiuj foldery <code>static</code> oraz <code>template</code> do naszego projektu - <code>/home/mroz/RPI0-Internet-thingy-workshops/FlaskPrzyklad</code>. Nadpisz istniejące pliki. Pliki te zawierają aplikację kliencką - czyli stronę internetową kontrolkami użytkownika. Nie musisz się nimi przejmować, technologie internetowe nie są tematem tych warsztatów.</li>
+<li>(30 s) przekopiuj poniższy szkielet aplikacji do swojego pliku <code>flask_przyklad.py</code> tuż przed instrukcją <code>if __name__=='__main__':</code> :</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">matrix_state <span class="op">=</span> [
+    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, ],
+    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, ],
+    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, ],
+    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, ],
+    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, ],
+    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, ],
+    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, ],
+    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, ],
+]
+
+<span class="co">#</span>
+<span class="co"># Kod odpowiedzialny za obsluge wyswietlacza</span>
+<span class="co">#</span>
+
+<span class="co">#</span>
+<span class="co"># lista bibliotek koniecznych do obslugi wyswietlacza</span>
+<span class="co">#</span>
+<span class="im">from</span> luma.core.interface.serial <span class="im">import</span> spi, noop
+<span class="im">from</span> luma.core.render <span class="im">import</span> canvas
+<span class="im">from</span> luma.led_matrix.device <span class="im">import</span> max7219
+
+<span class="kw">def</span> init_led_matrix():
+    <span class="co">&quot;&quot;&quot;</span>
+<span class="co">    Funkcja odpowiedzialna za inicjalizacje wyswietlacza</span>
+<span class="co">    &quot;&quot;&quot;</span>
+    serial <span class="op">=</span> spi(port<span class="op">=</span><span class="dv">0</span>, device<span class="op">=</span><span class="dv">0</span>, gpio<span class="op">=</span>noop())
+    device <span class="op">=</span> max7219(serial, cascaded<span class="op">=</span><span class="dv">2</span>, block_orientation<span class="op">=</span><span class="dv">90</span>)
+    <span class="cf">return</span> device
+
+device <span class="op">=</span> init_led_matrix()
+
+
+<span class="at">@app.route</span>(<span class="st">&quot;/&quot;</span>, methods<span class="op">=</span>[<span class="st">&#39;POST&#39;</span>])
+<span class="kw">def</span> update_matrix():
+    <span class="co">&quot;&quot;&quot;</span>
+<span class="co">    Uchwyt odpowiedzialny za pobieranie informacji od uzytkownika - ktory</span>
+<span class="co">    pixel zapalic/zgasic</span>
+<span class="co">    &quot;&quot;&quot;</span>
+    <span class="kw">global</span> matrix_state
+    <span class="co">#</span>
+    <span class="co"># Zaloguj co tam nam uzytkownik przeslal</span>
+    <span class="co">#</span>
+    app.logger.info(<span class="bu">str</span>(request.get_data()))
+
+    <span class="co">#</span>
+    <span class="co"># Tutaj wstaw kod odpowiedzialyza pobieranie danych JSON od użytkownika oraz zmianę stanu zadanego piksela (zajrzyj</span>
+    <span class="co">#</span>
+
+
+    <span class="co">#</span>
+    <span class="co"># odswierz obraz na wyswietlaczu</span>
+    <span class="co">#</span>
+    <span class="cf">with</span> canvas(device) <span class="im">as</span> draw:
+        <span class="cf">for</span> x <span class="op">in</span> <span class="bu">range</span>(<span class="dv">16</span>):
+            <span class="cf">for</span> y <span class="op">in</span> <span class="bu">range</span>(<span class="dv">8</span>):
+                draw.point((x, y), matrix_state[y][x])
+    <span class="cf">return</span> <span class="st">&quot;OK&quot;</span>
+
+<span class="at">@app.route</span>(<span class="st">&quot;/matrix_state.json&quot;</span>)
+<span class="kw">def</span> matrix_state_handler():
+    <span class="co">&quot;&quot;&quot;</span>
+<span class="co">    Uchwyt zwracajacy aktualny stan macierzy led pod postacia dwuwymiarowej</span>
+<span class="co">    tablicy 16 x 8 zrzuconej do formatu json.</span>
+<span class="co">    :return:</span>
+<span class="co">    &quot;&quot;&quot;</span>
+    <span class="kw">global</span> matrix_state
+    <span class="co">#</span>
+    <span class="co"># tutaj wstaw kod odpowiedzialny za zwracania użytkonikowi swo</span>
+    <span class="co">#</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>(120 s) We wklejonym kodzie, wewnątrz funkcji <code>matrix_state_handler</code> dodaj kod odpowiedzialny za zwracanie użytkownikowi tablicy <code>matrix_state</code> pod postacią plik JSON (flask ściągawka). Wgraj zmiany, wejdź pod adres <code>http://&lt;nazwa malinki&gt;.local/matrix_state.json</code> i sprawdź czy działa.</li>
+<li>(600 s) We wklejonym fragmencie kodu, wewnątrz funkcji <code>update_matrix</code> wstaw kod odpowiedzialny za pobieranie przesłango przez użytkonika dokumentu JSON. Plik ten zwiera tablicę o następującej postaci: <code>[ &lt;x&gt;, &lt;y&gt;, &lt;wartosc&gt;]</code>, gdzie <code>&lt;x&gt;,&lt;y&gt;</code> to współrzędne piksela, zas <code>&lt;wartość&gt;</code> to żądana docelowa wartość piksela -czyli albo 0, albo 255. Zajrzyj do ściągawki flask. Wgraj nowy kod na malinkę, wejdź na adres <code>http://&lt;nazwa malinki&gt;.local/</code> i sprawdź - możesz zapalać i gasić piksele?</li>
+</ol>
+<p>Viola! Podaj adres malinki innej grupie i rozpocznij walkę! Narysuj serduszko, a oni niech zrobią napis'HS'. Kto wygrał?</p>
+</body>
+</html>

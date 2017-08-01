@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+<h1 id="moja-pierwsza-sciągawka-z-python">Moja pierwsza sciągawka z python</h1>
+<p>Python - wysokopoziomowy język programowania potokowego (szeregowego).</p>
+<h2 id="program-hello-world">Program hello world:</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#!/usr/bin/env python</span>
+<span class="co"># -*- coding: utf-8 -*-</span>
+<span class="bu">print</span>(<span class="st">&quot;witaj świecie!&quot;</span>)</code></pre></div>
+<p>Dwie pierwsze linijki nie są konieczne, ale warto je umieścić na początku każdego pliku.</p>
+<h2 id="absolutne-podstawy">Absolutne podstawy</h2>
+<table>
+<colgroup>
+<col width="24%" />
+<col width="42%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Polecenie</th>
+<th align="center">opis</th>
+<th align="right">wynik dzialania na ekranie konsoli</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">print(<wartość>)</td>
+<td align="center">wydrukuj na ekranie <wartość></td>
+<td align="right"><wartość></td>
+</tr>
+<tr class="even">
+<td align="left">x=<wartość></td>
+<td align="center">zapisz do zmiennej x wartosc <wartość></td>
+<td align="right">BRAK</td>
+</tr>
+<tr class="odd">
+<td align="left">x=&quot;tekst&quot;</td>
+<td align="center">zapisz do zmiennej x ciąg znaków &quot;telkst &quot;</td>
+<td align="right">BRAK</td>
+</tr>
+<tr class="even">
+<td align="left">y=x+1</td>
+<td align="center">dodaj 1 do zmiennej x a wynik zapisz w zmiennej x</td>
+<td align="right">BRAK</td>
+</tr>
+<tr class="odd">
+<td align="left">foo()</td>
+<td align="center">wywołaj funkcję foo</td>
+<td align="right">ZALEŻY OD FUNKCJI FOO</td>
+</tr>
+<tr class="even">
+<td align="left">foo(<wartość>, <wartość> , &lt;...&gt;)</td>
+<td align="center">wywołaj funkcję foo z zadanymi argumentami</td>
+<td align="right">ZALEŻY OD FUNKCJI FOO</td>
+</tr>
+<tr class="odd">
+<td align="left">foo() + bar(<wartość>)</td>
+<td align="center">dodaj do siebie wartości zwracane przez funkcje foo i bar</td>
+<td align="right">ZALEŻY OD FUNKCJI FOO i BAR</td>
+</tr>
+</tbody>
+</table>
+<p><code>&lt;wartość&gt;</code> - Jest to dowolne wyrażenie zwracające jakąś wartość - może to być jawnie wpisana wartosć stała (patrz niżej) lub wywołanie funkcji.</p>
+<p>Przykłady wartości: 1. Numeryczne całkowite: <code>1</code>, <code>-41</code>, <code>0xdeadbeef</code> 2. Numeryczne zmiennoprzecinkowe: <code>1.0</code>, <code>-4.2</code>, <code>+321234.222222</code>, <code>12e22</code> 3. Ciągi znaków (tekst): <code>'jakiś tekst w apostrofach'</code>, <code>&quot;jakis tekst w cudzyslowiu&quot;</code>, <code>&quot;&quot;&quot;Jakis tekst intepretowany w specjalny sposób&quot;&quot;&quot;</code></p>
+<h2 id="logika">Logika</h2>
+<h3 id="wartości-logiczne">Wartości logiczne</h3>
+<p>Python definiuje dwie podstawowe wartości logiczne: <code>True</code>, <code>False</code>.</p>
+<p>Wartości równoważne logicznemu fałszowi <code>None</code>, <code>0</code>, <code>[]</code> (pusta lista), <code>{}</code> (pusty słownik) itd. Wartości równoważne logicznej prawdzie: <code>1</code>, <code>&quot;dowolny niepusty ciąg znaków&quot;</code>, <code>['dowolna', 'niepusta', 'lista']</code>, <code>{'dowolny':'niepusty słownik'}</code></p>
+<h3 id="instrukcje-sterujące">Instrukcje sterujące</h3>
+<p>Jest to zestaw instrukcji, które w zależności od logicznej wartości <warunek> wykonują, lub nie <operację></p>
+<h4 id="jeżeli-if-elif-else">Jeżeli (if, elif, else)</h4>
+<p>Instukcja sprawdza <warunek>, jeśli warunek zwraca wartość logiczną <code>True</code> wykonuje <operacje> w przeciwnym wypadku przechodzi do następnej opcjonalnej sekcji <code>elif</code>, sprawdza <warunekN> i w zależności od wartości warunku wykonuje <operacjeN> albo przechodzi dalej. W końcu, jeśli wszystkie warunki były fałszywe zostaje wyknany blok <code>else</code>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">if</span> <span class="op">&lt;</span>warunek<span class="op">&gt;</span>:
+  <span class="op">&lt;</span>operacje<span class="op">&gt;</span>
+<span class="cf">elif</span> <span class="op">&lt;</span>warunek2<span class="op">&gt;</span>:
+  <span class="op">&lt;</span>operacje<span class="op">&gt;</span>
+<span class="cf">elif</span> <span class="op">&lt;</span>warunek3<span class="op">&gt;</span>:
+  <span class="op">&lt;</span>operacje<span class="op">&gt;</span>
+<span class="cf">elif</span> <span class="op">&lt;</span>warunket4<span class="op">&gt;</span>:
+  <span class="op">&lt;</span>peracje4<span class="op">&gt;</span>
+<span class="cf">else</span>:
+  <span class="op">&lt;</span>operacje5<span class="op">&gt;</span></code></pre></div>
+<h4 id="pętla-while">Pętla (while)</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">while</span> <span class="op">&lt;</span>warunek<span class="op">&gt;</span>:
+  <span class="op">&lt;</span>operacje<span class="op">&gt;</span></code></pre></div>
+<p>Instukcja powoduje cykliczne wykonywanie <code>&lt;operacje&gt;</code> za każdym razem sprawdzając czy <code>&lt;warunek&gt;</code> zwraca wartość <code>True</code>. W momencie, w którym warunek przestaje zwracać logiczną prawdę, pętla się kończy.</p>
+<h4 id="iteracje-for">Iteracje (for)</h4>
+<p><sekwencja> - pewna instrukcja zwracająca sekwencję - np. lista <code>[]</code>, słownik, ciąg znaków, a najczęściej <code>range(&lt;from&gt;,[&lt;to&gt;[, &lt;step&gt;]])</code> np. <code>range(10)</code>, <code>range(1,100,2)</code> - czyli odpowiednio: liczby całkowite od 0 do 9 włącznie, liczby parzyste od 1 do 99;</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> X <span class="op">in</span> <span class="op">&lt;</span>sekwencja<span class="op">&gt;</span>:
+  <span class="op">&lt;</span>instukcje<span class="op">&gt;</span></code></pre></div>
+<p>czyli np (wydrukuje liczby całkowite od 0 do 9 włącznie</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> x <span class="op">in</span> <span class="bu">range</span>(<span class="dv">10</span>):
+  <span class="bu">print</span>(x)</code></pre></div>
+<h2 id="funkcje">Funkcje</h2>
+<p>Funkcja to blok instrukcji posiadający swoją nazwę, który może przyjmować argumenty, operować na nich i zwracać jakąś wartość.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> <span class="op">&lt;</span>nazwa<span class="op">&gt;</span>( <span class="op">&lt;</span>argumenty<span class="op">&gt;</span> ):
+  <span class="op">&lt;</span>operacje<span class="op">&gt;</span>
+  <span class="cf">return</span> <span class="op">&lt;</span>wartość<span class="op">&gt;</span></code></pre></div>
+<p>Czyli np. (wypisze w konsoli 4.5):</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> dodaj(x, y):
+  z <span class="op">=</span> x<span class="op">+</span>y
+  <span class="cf">return</span> z
+
+<span class="bu">print</span>( dodaj(<span class="dv">1</span>, <span class="fl">3.5</span>) )</code></pre></div>
+<h2 id="zmienne-globalne">Zmienne globalne</h2>
+<p>W normalnych warunkach zmienne zdefiniowane po za funkcją, są w niej niedostępne. Aby obejść ten problem, w ciele funkcji można umieścić instrukcję <code>global &lt;nazwa zmiennej&gt;</code>:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">licznik<span class="op">=</span><span class="dv">0</span>
+
+<span class="kw">def</span> zwieksz_licznik():
+  <span class="kw">global</span> licznik
+  licznik<span class="op">+=</span><span class="dv">1</span>
+  <span class="bu">print</span>(<span class="st">&quot;licznik zwiekszony, stan:&quot;</span> <span class="op">+</span> <span class="bu">str</span>(licznik))</code></pre></div>
+<h2 id="zewnętrzne-biblioteki">Zewnętrzne biblioteki</h2>
+<p>Importowanie zewnętrznych bibliotek</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> <span class="op">&lt;</span>biblioteka<span class="op">&gt;</span>
+<span class="im">import</span> <span class="op">&lt;</span>biblioteka<span class="op">&gt;</span>.<span class="op">&lt;</span>moduł<span class="op">&gt;</span>
+<span class="im">from</span> <span class="op">&lt;</span>biblioteka<span class="op">&gt;</span> <span class="im">import</span> <span class="op">&lt;</span>moduł<span class="op">&gt;</span>
+<span class="im">import</span> <span class="op">&lt;</span>biblioteka<span class="op">&gt;</span> <span class="im">as</span> <span class="op">&lt;</span>nowa nazwa<span class="op">&gt;</span></code></pre></div>
+<p>Czyli np.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> flask <span class="im">import</span> Flask
+app <span class="op">=</span> Flask(<span class="va">__name__</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> os.path
+<span class="bu">print</span>(os.path.dirname(<span class="st">&#39;/home/pi/wihajstry&#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> glob <span class="im">import</span> glob
+<span class="bu">print</span>(glob(<span class="st">&quot;*.py&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> RPi.GPIO <span class="im">as</span> GPIO
+GPIO.setmode(GPIO.BCM)</code></pre></div>
+<h2 id="przydatne-biblioteki">Przydatne biblioteki</h2>
+<ol style="list-style-type: decimal">
+<li>time : zawiera funkcje takie jak <code>time</code> - zwraca aktualny czas w sekundach od &quot;unix epoch&quot; oraz <code>sleep</code>, która usypia program na zadaną liczbę sekund</li>
+</ol>
+<h2 id="dekoratory">Dekoratory</h2>
+<p>Na potrzeby tych laboratoriów nie wyjaśnimy czym są dekoratory. W uproszczeniu przyjmijmy że jest to forma dołączania do funkcji pewnej funkcjonalności.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+@<span class="op">&lt;</span>dekorator<span class="op">&gt;</span>( <span class="op">&lt;</span>argumenty dekoratora<span class="op">&gt;</span> )
+<span class="kw">def</span> <span class="op">&lt;</span>nazwa funkcji<span class="op">&gt;</span>( <span class="op">&lt;</span>argumenty funkcji<span class="op">&gt;</span> ):
+  <span class="op">&lt;</span>instrukcje<span class="op">&gt;</span></code></pre></div>
+<p>Czyli np. (z dokumentacji Flask):</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="at">@app.route</span>(<span class="st">&#39;/&#39;</span>)
+<span class="kw">def</span> hello_world():
+    <span class="cf">return</span> <span class="st">&#39;Hello, World!&#39;</span></code></pre></div>
+</body>
+</html>

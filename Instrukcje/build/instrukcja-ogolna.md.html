@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+<h1 id="warsztaty-z-wichajstrów-internetowych">Warsztaty z wichajstrów internetowych</h1>
+<h2 id="instrukcja-wstępna---wstęp-do-python-i-flask.">Instrukcja wstępna - wstęp do python i flask.</h2>
+<hr />
+<h2 id="opis-warsztatów-10-min">Opis warsztatów (~10 min)</h2>
+<p>Celem warsztatu jest zapoznanie warsztatowicza z technologiami i narzędziami wykorzstywanymi często w szeroko rozumianym IOT (ang Internet of things) co na polski tłumaczy się jako &quot;internetowe wichajstry&quot;. Mowa tutaj o:</p>
+<ol style="list-style-type: decimal">
+<li>Python - język programowania stworzony z myślą o łatwości nauki i wykorzystania</li>
+<li>Raspberry PI 0 W - mini komputer typu SBC (Single Board Computer) będący częścią ekosystemu raspberry PI stworzony z myślą o edukacji</li>
+<li>WiFi - muszę tłumaczyć?</li>
+<li>Proste moduły elektroniczne , w tym serwomechanizm, cyfrowy termometr i wyświetlacz ledowy.</li>
+<li>Flask - biblioteka programistyczna Python stworzona z myślą o szybkim i łatwym tworzeniu aplikacji internetowych.</li>
+</ol>
+<p>Warsztat skład się z dwóch części - pierwszej, w której sztywno stosujemy się do instrukcji, a która ma dać podstawy do części drugiej, na której uczestnicy przy wsparciu prowadzącego samodzielnie realizują przykładowe projekty .</p>
+<p>Na koniec warsztatów każdy uczestnik/grupa powinna zaprezentować w pełni sprawny wichajster internetowy kontrolowany przez internet za pośrednictwem przeglądarki internetowej.</p>
+<hr />
+<h2 id="opis-wykorzystywanych-technologii-oraz-ważne-linki-10-min">Opis wykorzystywanych technologii oraz ważne linki (~10 min)</h2>
+<h3 id="raspberry-pi-zero-w">Raspberry pi zero W</h3>
+<p>Strona producenta: <a href="https://www.raspberrypi.org">raspberrypi.org</a></p>
+<p>Jest to mały komputer, oparty na procesorze w architekturze ARM (podobny do tego, który masz w telefonie) zaprojetkowany z zgodnie z dwoma głównymi założeniami:</p>
+<ol style="list-style-type: decimal">
+<li>Ma być tani</li>
+<li>Ma być doskonałym narzędziem do edukacji</li>
+</ol>
+<p>Biorąc pod uwagę, że koszt takiego komputera to 52 zł. plus przesyłka oraz karta pamięci oraz jego dużą popularność - możnaspokojnie założyc, że twórcy spełnili swoje założenia.</p>
+<p>Komputer zawiera:</p>
+<ol style="list-style-type: decimal">
+<li>Kartę sieciową WiFi + BT 4.0</li>
+<li>512 MB ram</li>
+<li>Procesor BCM2835 o taktowaniu 1 GHz</li>
+<li>Port USB mogący służyć albo do podłączenia urządzeń zewnętrznych (np. pendrive_ albo do podłączenia do komputera (tak jak podłącza się telefon celem synchronizacji).</li>
+<li>Gniazdo kart micro SD (karta pamięci jest konieczna do działania komputera)</li>
+<li>Gniazdo mini HDMI do podłączenia monitora</li>
+<li>40-sto pinowe złącze GPIO - czyli zestaw pinów do których można podłączać zewnętrzne moduły elektroniczne - od prostej diodki i przycisku aż po skomplikowane kontrolery automatyki domowej.</li>
+<li>Złącze kamery - pozwala na realizację projektów wizyjnych - system monitoringu, kamera internetowa, photobooth itd.</li>
+</ol>
+<p>Przykładowe projekty znalezione w internetach:</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://www.youtube.com/watch?v=SH1kTxJlQqI">Portable Raspberry Pi Photo Booth</a></li>
+<li><a href="https://www.youtube.com/watch?v=fkVBAcvbrjU">Raspberry Pi Smart Mirror</a></li>
+<li><a href="https://www.hackster.io/robin-cole/pi-camera-doorbell-with-notifications-408d3d">Pi Camera Doorbell with Notifications!</a></li>
+<li><a href="https://www.hackster.io/tinkernut/diy-vintage-spotify-radio-using-a-raspberry-pi-bc3322">DIY Vintage Spotify Radio Using A Raspberry Pi</a></li>
+<li><a href="https://hackaday.io/project/9811-pi0drone">Pi0drone</a></li>
+</ol>
+<h4 id="jak-zacząć-zabawę-z-malinką">Jak zacząć zabawę z malinką?</h4>
+<p>Masz dwa wybory:</p>
+<ol style="list-style-type: decimal">
+<li>Przyjść na warsztaty, gdzie malinki oraz komputery są przygotowane do pracy</li>
+<li>Skorzystać z materiałów edukacyjnych na stronie producent: <a href="https://www.raspberrypi.org/help/">raspberrypi.org/help/</a></li>
+</ol>
+<h3 id="python-2.7">Python 2.7</h3>
+<p>Dokumentacja: <a href="https://docs.python.org/2.7/">docs.python.org/2.7/</a></p>
+<p>Jest to język programowania wysokiego poziomu, stworzony z myślą o łatwości czytania i pisania kodu. W tych warsztatach wykorzystujemy starą wersję tego języka (2.7) ponieważ jest ona preinstalowana na raspbianie.</p>
+<p>Przykład kodu:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> heater_control(heater):
+  <span class="cf">if</span> temperature <span class="op">&lt;</span> MIN_TEMPERATURE:
+    heater.enable()
+  <span class="cf">elif</span> temperature <span class="op">&gt;=</span> MAX_TEMPERATURE <span class="op">and</span> heater.is_enabled():
+    heater.disable()
+
+heater <span class="op">=</span> Heater()
+<span class="cf">while</span> <span class="va">True</span>:
+  sleep(<span class="dv">1</span>)</code></pre></div>
+<p>Czy potrafisz przeczytać i zinterpretować powyższy kod python?</p>
+<h3 id="flask">Flask</h3>
+<p>Strona projektu: <a href="http://flask.pocoo.org/">flask.pocoo.org</a></p>
+<p>Biblioteka do szybkiego tworzenia aplikacji internetowych - to znaczy aplikacji, które działają na serwerze i komunikują się z użytkownikiem za pośrednictwem strony internetowej. Flask dąży do tego, aby w jak najmniejszym stpniu krępować programistę oraz maksymalnie uprościć proces tworzenia nowej aplikacji internetowej.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> flask <span class="im">import</span> Flask
+app <span class="op">=</span> Flask(<span class="va">__name__</span>)
+
+<span class="at">@app.route</span>(<span class="st">&quot;/&quot;</span>)
+<span class="kw">def</span> hello():
+    <span class="cf">return</span> <span class="st">&quot;Hello World!&quot;</span></code></pre></div>
+<p>Powyżej jest przykład minimalnej aplikacji we Flask pobrany prosto z dokumentacji.</p>
+<p>W ramach przygotowanych warsztatów, wystarczy że wciśniesz <code>F5</code>, a prekonfigurowane środowisko programistyczne (IDE) uruchomi Twoją aplikację na malince.</p>
+<p>Jeśli chcesz uruchomić aplikację ręcznie, to zajrzyj do ściągawki flask.</p>
+<h3 id="geany">Geany</h3>
+<p>Strona projektu: <a href="https://www.geany.org/">geany.org/</a></p>
+<p>Jest to lekkie środowisko programistyczne obsługujące wiele różnych języków programowania. Jeśli chodzi o wsparcie dla Python jest &quot;akceptowalne&quot;. W ramach warsztatów będziemy kożystać tego IDE ze względu na możliwość łątwej konfiguracji, lekkość programu, stabilność oraz licencję GNU GPL.</p>
+<hr />
+<h2 id="instrukcja---pierwsze-kroki-z-python-20-min-przerwać">Instrukcja - pierwsze kroki z python (~20 min, przerwać!)</h2>
+<p>Zacznijmy szybko - krok po kroku będziemy tworzyć kod, który wydrukuje nam 10 razy &quot;witaj świecie&quot;, lub nie w zależności od wartości parametru X. 1. (30 s) Uruchom Geany 2. (30 s) Stwórz nowy plik 3. (60 s) W ściągawce python znajdź i odpal program wypisujący &quot;witaj świecie&quot; w konsoli. 4. (20 s) Zapisz plik, wciśnij 'F5' aby uruchomić program 5. (300 s) Korzystając ze ściągawki python zmodyfikuj kod tak, aby wyświetlił słowa &quot;witaj świecie&quot; 10 razy (podpowieź: range) 6. (120 s) Kod stworzony w poprzednim punkcie zapakuj do funkcji o nazwie <code>moja_pierwsza_funkcja</code> i wywołaj tą funkcję - powinien działać w dokładnie ten sam sposób. 7. (120 s) Do kodu z poprzedniego punktu dodaj zmienną X o wartości <code>True</code>, zaś wywołaniefunkcji uzależnij od wartości zmiennej X (podpowiedź: JEŻELI). Nie zastanawiaj się - to zadanie jest naprawdę toporne) 8. (180 s) Warunek z punktu 8 zapaku do funkcji o nazwie <code>moja_druga_funkcja</code>, która przyjmuje X jako parametr wejściowy i wywołaj funkcję z wartością <code>True</code>. Uruchom program. Wyświetla &quot;witaj świecie&quot; 10 razy? 9. (120 s) A teraz wywołaj <code>moja_druga_funkcja</code> z parametrem <code>False</code>. Wyświetla &quot;witaj świecie&quot; 10 razy?</p>
+<h2 id="instrukcja---pierwsze-kroki-z-flask-30-min">Instrukcja - pierwsze kroki z Flask (~30 min)</h2>
+<p>Stwożymy prostą aplikację internetową, która będzie zliczać liczbę kliknięć w przycisk na stronie. Wszystkie pliki statyczne, obrazki, dokumenty html, js, css są już umeszczone w folderach 'static' oraz 'templates'.</p>
+<p>Aby uruchomić zmodyfikowany program najpierw zamknij okno terminala, które wyskoczyło poprzednim razem, a potem wciśnij klawisz 'F5', aby uruchomić aplikację jeszcze raz.</p>
+<ol style="list-style-type: decimal">
+<li>(20 s) Otwórz geany (zamknij wszystkie otwarte pliki)</li>
+<li>(30 s) W geany wciśnij klawisze <code>ctrl + o</code>, pojawi się okno otwierania pliku, wybierz w nim <code>/home/hs/RPI0-Internet-thingy-workshops/FlaskPrzyklad/flask_przyklad.py</code>. Plik zawiera przykładowy szkielet aplikacji Flask.</li>
+<li>(20 s) Wciśnij przycisk 'F5' - powinno pojawić się okienko konsoli informujące o uruchamianiu aplikacji zawierający mi. linijkę &quot; * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)&quot; otwórz przeglądarkę i odwiedź adres <code>http://localhost:5000/</code>. Czy widzisz &quot;witaj świecie!&quot;?</li>
+<li>(120 s) Ze ściągawki skopiuj kod i wklej na końcu pliku kod odpowiedzialny za serwowanie plików statycznych oraz favicon. uruchom aplikację ponownie i odwiedź adres <code>http://localhost:5000/</code>. Czy widizsz różową malinkę w pasku przeglądarki?</li>
+<li>(180 s) Dodaj zmienną o nazwie globalną <code>licznik</code> i wartości <code>0</code> (zerknij do python ściągawki). Zmienną zdefiniuj na początku pliku, bezpośrednio po instrukcjach <code>include</code>. Zmodyfikuj przykładowy kod tak, aby zwracał tekst &quot;Witaj świecie po raz <licznik>&quot;, tak aby w miejscu <licznik> pojawiła się wartość zmiennej licznik. Działa?</li>
+<li>(30 s) Zmodyfikuj kod tak, aby za każdym razem przed wyświetleniem tekstu zwiększał wartość zmiennej <code>licznik</code> o 1. Odśwież stronę kilka razy. Licznik się zwiększa?</li>
+<li>(60 s) Zmodyfikuj kod tak, aby funkcja z poprzedniego punktu była dostępna pod adresem <code>/licznik</code> zamiast <code>/</code>. Sprawdź czy możesz wejść na <code>http://localhost:5000/</code>, a teraz sprawdź czy możesz wejść na adres <code>http://localhost:5000/licznik</code>.</li>
+<li>(180 s) Ponownie skopiuj i wklej na końcu pliku kod odpowiedzialny za serwowanie favicon i zmodyfikuj go tak, aby serwował plik &quot;index.html&quot; z folderu &quot;templates&quot; (fragment kodu z mimetype usuń). Uruchom i odwieź <code>http://localhost:5000/</code> - czy pojawia się strona z przyciskiem?</li>
+<li>(180 s) Zmodyfikuj kod funkcji z punktu 8. tak aby reagował na zapytania POST (patrz ściągawka flask). Wciśnij 'f5' i spróbuj przez przeglądarkę wejść na adres <code>http://localhost:5000/</code> - nie powinno działać. Teraz wejdź na <code>http://localhost:5000/</code> i wciśnij przycisk równocześnie przyglądając się okinku konsoli. Czy w konsoli wyświetliła się informacja o zapytaniu POST?</li>
+<li>(300 s) Wciśnięcie przycisku powoduje wysłanie na serwer dokumentu JSON zawierającego informacje o przeglądarce oraz wartość o którą należy zwiększyć wartość licznika. Wysyłany dokument JSON ma postać <code>{&quot;browser&quot;:&quot;&lt;informacje o przegladarce&gt;&quot;,&quot;add&quot;: &lt;x&gt;}</code>, gdzie <code>x</code> to jakaś liczba. Odpowiedź serwera jest natychmiast wyświetlana w postaci okienka alert.</li>
+<li>Wykorzystaj ściągawkę flask do przerobienia funkcj z punktu 9. w taki sposób, aby pobierała plik JSON, parsowała go i wartość <code>add</code> z tego pliku dodawała dp zmiennej licznik. Wgraj 'F5' i wejdź na <code>http://localhost:5000</code>,wciśnij przycisk kilka razy - czy licznik zwiększa swoją wartość?</li>
+</ol>
+<h2 id="wgrywanie-aplikacji-na-malinkę">Wgrywanie aplikacji na malinkę</h2>
+<p>Teraz, kiedy przećwiczyliśmy już podstawy python oraz flask na naszym komputerze lokalnym, czas przejść na programowanie malinki. Folder <code>FlaskPrzyklad</code> zawiera w sobie przykładowy projekt geany oraz skrypty konieczne do wysyłania plików na malinkę oraz ich zdalne uruchamianie.</p>
+<ol style="list-style-type: decimal">
+<li>(40 s) W geany w menu &quot;Project&quot; wybierz &quot;open&quot;, w otwartym oknie wskaż ścieżkę &quot;/home/hs/RPI0-Internet-thingy-workshops/FlaskPrzyklad/flask_przyklad.geany&quot;</li>
+<li>(60 s) W panelu po lewej, w zakładce &quot;files&quot; stronie Geany przejdź do tego samego folderu i otwórz plik &quot;config.sh&quot;</li>
+<li>(120 s) Znajdź linijkę podobną do: <code>export PI_HOST=&quot;mroz3-pi0.local&quot;</code> i zmień &quot;mroz3-pi0&quot; na nazwę malinki, którą dostałeś - powinna znajdowaćsie na naklejce na obudowie.</li>
+<li>(60 s) Wciśnij 'F5' i poproś prowadzącego żeby sprawdził czy wszystko działa. Wio la!</li>
+</ol>
+<p><em>Nie usuwaj plików i przejdź do instrukcji specyficznej dla Twojego wybranego projektu</em></p>
+</body>
+</html>
