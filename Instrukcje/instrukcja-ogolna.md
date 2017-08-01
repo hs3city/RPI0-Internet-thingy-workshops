@@ -1,6 +1,6 @@
 Warsztaty z wichajstrów internetowych
 ================
-Zestaw: Pogodynka internetowa
+Instrukcja wstępna - wstęp do python i flask.
 ----------------
 
 ---
@@ -102,13 +102,7 @@ Powyżej jest przykład minimalnej aplikacji we Flask pobrany prosto z dokumenta
 
 W ramach przygotowanych warsztatów, wystarczy że wciśniesz `F5`, a prekonfigurowane środowisko programistyczne (IDE) uruchomi Twoją aplikację na malince.
 
-Jeśli chcesz uruchomić aplikację ręcznie, to po wgraniu plikóœ na malinkę wydaj polecenie:
-
-```bash
-FLASK_APP=hello.py flask run
-```
-
-polecenie uruchomi testowy serwer flask oraz zwróci adres, pod którym możesz się do niego "dorwać" - np. `* Running on http://localhost:5000/`.
+Jeśli chcesz uruchomić aplikację ręcznie, to zajrzyj do ściągawki flask.
 
 ###Geany
 Strona projektu: [geany.org/](https://www.geany.org/)
@@ -117,7 +111,7 @@ Jest to lekkie środowisko programistyczne obsługujące wiele różnych język�
 
 ---
 
-Instrukcja - pierwsze kroki z python (~20 min)
+Instrukcja - pierwsze kroki z python (~20 min, przerwać!)
 ----------------
 
 Zacznijmy szybko - krok po kroku będziemy tworzyć kod, który wydrukuje nam 10 razy "witaj świecie", lub nie w zależności od wartości parametru X.
@@ -139,20 +133,26 @@ Stwożymy prostą aplikację internetową, która będzie zliczać liczbę klikn
 Aby uruchomić zmodyfikowany program najpierw zamknij okno terminala, które wyskoczyło poprzednim razem, a potem wciśnij klawisz 'F5', aby uruchomić aplikację jeszcze raz.
 
 1. (20 s) Otwórz geany (zamknij wszystkie otwarte pliki)
-2. (40 s) W geany w menu "Project" wybierz "open", w otwartym oknie wybierz po prawej stronie "Home folder", wskaż ścieżkę "RPI0-Internet-thingy-workshops/flask_example/project.geany"
-3. (60 s) W panelu po prawej, w zakładce "files" stronie Geany przejdź do tego samego folderu i otwórz plik "config.sh"
-4. (120 s) Znajdź linijkę podobną do: `export PI_HOST="mroz3-pi0.local"` i zmień "mroz3-pi0" na nazwę malinki, którą dostałeś.
-5. (60 s) Wciśnij 'F5' i poproś prowadzącego żeby sprawdził czy wszystko działa.
-6. (180 s) W ściągawce flask znajdź i skopiuj kod "witaj świecie". Wciśnij 'F5' i w przeglądarce internetowej odwiedź adres `http://<nazwa malinki>.local/`, czyli np `http://mroz2-pi0.local`. Pokazuje się "witaj świecie!" ?
-7. (180 s) Dodaj zmienną o nazwie `licznik` i wartości `0`. Zmienną zdefiniuj na początku pliku, bezpośrednio po instrukcjach `include`. Zmodyfikuj przykładowy kod tak, aby zwracał tekst "Witaj świecie po raz <licznik>", tak aby w miejscu <licznik> pojawiła się wartość zmiennej licznik. Działa?
-8. (30 s) Zmodyfikuj kod tak, aby za każdym razem przed wyświetleniem tekstu zwiększał wartość zmiennej `licznik` o 1. Odśwież stronę kilka razy. Licznik się zwiększa?
-9. (60 s) Zmodyfikuj kod tak, aby funkcja z poprzedniego punktu była dostępna pod adresem '/licznik' zamiast '/'. Sprawdź czy możesz wejść na `http://<nazwa malinki>.local/`, a teraz sprawdź czy możesz wejść na adres `http://<nazwa malinki>.local/licznik`
-10. (120 s) Ze ściągawki skopiuj kod i wklej na końcu pliku kod odpowiedzialny za serwowanie plików statycznych oraz favicon.
-11. (180 s) Ponownie skopiuj i wklej na końcu pliku kod odpowiedzialny za serwowanie favicon i zmodyfikuj go tak, aby serwował plik "index.html" z folderu "templates" (fragment kodu z mimetype usuń). Uruchom i odwieź `http://<nazwa malinki>.local - czy pojawia się strona z przyciskiem?
-12. (300 s) Wciśnięcie przycisku powoduje wysłanie na serwer dokumentu JSON zwierającego informacje o przeglądarce oraz wartość o którą należy zwiększyć wartość licznika. Wysyłany dokument JSON ma postać `{"browser":"<informacje o przegladarce>","add": <x>}`, gdzie `x` to jakaś liczba. Odpowiedź serwera jest natychmiast wyświetlana w postaci okienka 'alert'.
-Zmodyfikuj kod funkcji z punktu 9. tak aby reagował na zapytania POST. Wciśnij 'f5' i spróbuj przez przeglądarkę wejść na adres `http://<nazwa malinki>.local/licznik` - nie powinno działać. Teraz wejdź na `http://<nazwa malinki>.local` i wciśnij przycisk równocześnie przyglądając się okinku konsoli. Czy wyświetliła się informacja o zapytaniu POST?
-13. (300 s) Wykorzystaj ściągawkę flask do przerobienia funkcj z punktu 12. w taki sposób, aby pobierała plik JSON, parsowała go i wartość `add` z tego pliku zmiennej licznik. Wgraj 'F5' i wejdź na `http://<nazwa malinki>.local`,wciśnij przycisk kilka razy - czy licznik zwiększa swoją wartość?
+2. (30 s) W geany wciśnij klawisze `ctrl + o`, pojawi się okno otwierania pliku, wybierz w nim `/home/hs/RPI0-Internet-thingy-workshops/FlaskPrzyklad/flask_przyklad.py`. Plik zawiera przykładowy szkielet aplikacji Flask.
+3. (20 s) Wciśnij przycisk 'F5' - powinno pojawić się okienko konsoli informujące o uruchamianiu aplikacji zawierający mi. linijkę " * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)" otwórz przeglądarkę i odwiedź adres `http://localhost:5000/`. Czy widzisz "witaj świecie!"?
+4. (120 s) Ze ściągawki skopiuj kod i wklej na końcu pliku kod odpowiedzialny za serwowanie plików statycznych oraz favicon. uruchom aplikację ponownie i odwiedź adres `http://localhost:5000/`. Czy widizsz różową malinkę w pasku przeglądarki?
+5. (180 s) Dodaj zmienną o nazwie globalną `licznik` i wartości `0` (zerknij do python ściągawki). Zmienną zdefiniuj na początku pliku, bezpośrednio po instrukcjach `include`. Zmodyfikuj przykładowy kod tak, aby zwracał tekst "Witaj świecie po raz <licznik>", tak aby w miejscu <licznik> pojawiła się wartość zmiennej licznik. Działa?
+6. (30 s) Zmodyfikuj kod tak, aby za każdym razem przed wyświetleniem tekstu zwiększał wartość zmiennej `licznik` o 1. Odśwież stronę kilka razy. Licznik się zwiększa?
+7. (60 s) Zmodyfikuj kod tak, aby funkcja z poprzedniego punktu była dostępna pod adresem `/licznik` zamiast `/`. Sprawdź czy możesz wejść na `http://localhost:5000/`, a teraz sprawdź czy możesz wejść na adres `http://localhost:5000/licznik`.
+8. (180 s) Ponownie skopiuj i wklej na końcu pliku kod odpowiedzialny za serwowanie favicon i zmodyfikuj go tak, aby serwował plik "index.html" z folderu "templates" (fragment kodu z mimetype usuń). Uruchom i odwieź `http://localhost:5000/` - czy pojawia się strona z przyciskiem?
+9. (180 s) Zmodyfikuj kod funkcji z punktu 8. tak aby reagował na zapytania POST (patrz ściągawka flask). Wciśnij 'f5' i spróbuj przez przeglądarkę wejść na adres `http://localhost:5000/` - nie powinno działać. Teraz wejdź na `http://localhost:5000/` i wciśnij przycisk równocześnie przyglądając się okinku konsoli. Czy w konsoli wyświetliła się informacja o zapytaniu POST?
+9. (300 s) Wciśnięcie przycisku powoduje wysłanie na serwer dokumentu JSON zawierającego informacje o przeglądarce oraz wartość o którą należy zwiększyć wartość licznika. Wysyłany dokument JSON ma postać `{"browser":"<informacje o przegladarce>","add": <x>}`, gdzie `x` to jakaś liczba. Odpowiedź serwera jest natychmiast wyświetlana w postaci okienka alert.
+10. Wykorzystaj ściągawkę flask do przerobienia funkcj z punktu 9. w taki sposób, aby pobierała plik JSON, parsowała go i wartość `add` z tego pliku dodawała dp zmiennej licznik. Wgraj 'F5' i wejdź na `http://localhost:5000`,wciśnij przycisk kilka razy - czy licznik zwiększa swoją wartość?
 
+Wgrywanie aplikacji na malinkę
+----------------
+
+Teraz, kiedy przećwiczyliśmy już podstawy python oraz flask na naszym komputerze lokalnym, czas przejść na programowanie malinki. Folder `FlaskPrzyklad` zawiera w sobie przykładowy projekt geany oraz skrypty konieczne do wysyłania plików na malinkę oraz ich zdalne uruchamianie.
+
+1. (40 s) W geany w menu "Project" wybierz "open", w otwartym oknie wskaż ścieżkę "/home/hs/RPI0-Internet-thingy-workshops/FlaskPrzyklad/flask_przyklad.geany"
+3. (60 s) W panelu po lewej, w zakładce "files" stronie Geany przejdź do tego samego folderu i otwórz plik "config.sh"
+4. (120 s) Znajdź linijkę podobną do: `export PI_HOST="mroz3-pi0.local"` i zmień "mroz3-pi0" na nazwę malinki, którą dostałeś - powinna znajdowaćsie na naklejce na obudowie.
+5. (60 s) Wciśnij 'F5' i poproś prowadzącego żeby sprawdził czy wszystko działa.
 Wio la!
 
 *Nie usuwaj plików i przejdź do instrukcji specyficznej dla Twojego wybranego projektu*

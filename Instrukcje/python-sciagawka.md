@@ -19,16 +19,17 @@ Absolutne podstawy
 
 
 | Polecenie                         | opis                                                      | wynik dzialania na ekranie konsoli           |
-| :------------ ---                 |:---------------------------------------------------------:|---------------------------------:|
-| print(<wartość>)                  | wydrukuj na ekranie <wartość>                             | <wartość>                            |
-| x=<wartość>                       | zapisz do zmiennej x wartosc <wartość>                    | BRAK                    |
-| x="tekst"                         | zapisz do zmiennej x ciąg znaków "telkst "                | BRAK            |
-| y=x+1                             | dodaj 1 do zmiennej x a wynik zapisz w zmiennej x         | BRAK
-| foo()                             | wywołaj funkcję foo                                       | ZALEŻY OD FUNKCJI FOO |
-| foo(<wartość>, <wartość> , <...>) | wywołaj funkcję foo z zadanymi argumentami                | ZALEŻY OD FUNKCJI FOO |
-| foo() + bar(<wartość>)            | dodaj do siebie wartości zwracane przez funkcje foo i bar | ZALEŻY OD FUNKCJI FOO i BAR |
-###<wartość>
-Jest to dowolne wyrażenie zwracające jakąś wartość - może to być jawnie wpisana wartosć stała (patrz niżej) lub wywołanie funkcji.
+| :-------------------------------- |:---------------------------------------------------------:|---------------------------------------------:|
+| print(<wartość>)                  | wydrukuj na ekranie <wartość>                             | <wartość>                                    |
+| x=<wartość>                       | zapisz do zmiennej x wartosc <wartość>                    | BRAK                                         |
+| x="tekst"                         | zapisz do zmiennej x ciąg znaków "telkst "                | BRAK                                         |
+| y=x+1                             | dodaj 1 do zmiennej x a wynik zapisz w zmiennej x         | BRAK                                         |
+| foo()                             | wywołaj funkcję foo                                       | ZALEŻY OD FUNKCJI FOO                        |
+| foo(<wartość>, <wartość> , <...>) | wywołaj funkcję foo z zadanymi argumentami                | ZALEŻY OD FUNKCJI FOO                        |
+| foo() + bar(<wartość>)            | dodaj do siebie wartości zwracane przez funkcje foo i bar | ZALEŻY OD FUNKCJI FOO i BAR                  |
+
+
+`<wartość>` - Jest to dowolne wyrażenie zwracające jakąś wartość - może to być jawnie wpisana wartosć stała (patrz niżej) lub wywołanie funkcji.
 
 Przykłady wartości:
 1. Numeryczne całkowite: `1`, `-41`, `0xdeadbeef`
@@ -108,6 +109,18 @@ def dodaj(x, y):
 print( dodaj(1, 3.5) )
 ```
 
+Zmienne globalne
+----------------
+W normalnych warunkach zmienne zdefiniowane po za funkcją, są w niej niedostępne. Aby obejść ten problem, w ciele funkcji można umieścić instrukcję `global <nazwa zmiennej>`:
+
+```python
+licznik=0
+
+def zwieksz_licznik():
+  global licznik
+  licznik+=1
+  print("licznik zwiekszony, stan:" + str(licznik))
+```
 
 Zewnętrzne biblioteki
 ----------------

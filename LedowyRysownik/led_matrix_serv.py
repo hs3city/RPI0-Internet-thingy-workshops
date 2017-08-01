@@ -42,9 +42,10 @@ def hello():
 @app.route("/", methods=['POST'])
 def update_matrix():
     """
-    Uchwyt odpowiedzialny za pobieranie informacji od uzytkownika - ktory 
+    Uchwyt odpowiedzialny za pobieranie informacji od uzytkownika - ktory
     pixel zapalic/zgasic
     """
+    global matrix_state
     #
     # Zaloguj co tam nam uzytkownik przeslal
     #
@@ -76,8 +77,9 @@ def matrix_state_handler():
     """
     Uchwyt zwracajacy aktualny stan macierzy led pod postacia dwuwymiarowej
     tablicy 16 x 8 zrzuconej do formatu json.
-    :return: 
+    :return:
     """
+    global matrix_state
     return json.dumps(matrix_state)
 
 

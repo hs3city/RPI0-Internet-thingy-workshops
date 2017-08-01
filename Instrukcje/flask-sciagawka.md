@@ -61,7 +61,7 @@ def favicon():
     return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 ```
 
-Przyjmowanie zapytań POST z JSON
+Przyjmowanie zapytań POST z JSON - słownik
 ----------------
 Zakładając że użytkownik wyśle dokument JSON `{"pole1":"wartosc1", "pole2":3}`
 
@@ -79,6 +79,45 @@ def update_matrix():
 
 ```
 
-zmienne `pole1`, `pole2` będą teraz zawierać odpowiednie wartości z dokumentu JSON.
 
+Przyjmowanie zapytań POST z JSON - tablice
+----------------
+Zakładając że użytkownik wyśle dokument JSON `[123, 5, 42]`
+
+```python
+from flask import request
+
+@app.route("/akcja", methods=['POST'])
+def update_matrix():
+    # Zaloguj co tam nam uzytkownik przeslal
+    app.logger.info(str(request.get_data()))
+    data = request.get_json(force=True)
+    a = data[0]
+    b = data[1]
+    c = data[2]
+    return """{"status":"OK"}"""
+
+```
+zmienne `a`, `b`, `c`  będą teraz zawierać odpowiednia: 123, 5, 42.
+
+Zwracanie dokumantów JSON do użytkownika
+----------------
+
+Jeśli chcemy zwrócić użytkonikowi zawartość zmiennej `state` pod postacią dokumentu JSON należy:
+
+```python
+import json
+
+state = [
+  [ 1, 1, 1, 1],
+  [ 0, 0, 0, 0],
+  [ 1, 1, 1, 1],
+  [ 0, 0, 0, 0],
+]
+
+@app.route("/state.json")
+def get_state():
+  global state
+  return json.dumps(state)
+```
 

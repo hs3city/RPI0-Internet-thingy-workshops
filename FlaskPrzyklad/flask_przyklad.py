@@ -21,7 +21,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-  """Przykladowy uchwyt - serwuje powitanie, gdy uzytkownik odwiedzi adres malinki""""
+  """Przykladowy uchwyt - serwuje powitanie, gdy uzytkownik odwiedzi adres malinki"""
   return "Hello world"
 
 if __name__ == '__main__':
