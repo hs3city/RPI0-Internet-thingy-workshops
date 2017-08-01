@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt-get -y install git atool geany git python-pip
+sudo apt-get -y install git atool geany git python-pip sshpass htop
 sudo pip install flask
 cd ~
 mv ~/RPI0-Internet-thingy-workshops /tmp
