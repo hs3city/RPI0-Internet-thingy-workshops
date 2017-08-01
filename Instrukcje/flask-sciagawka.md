@@ -7,20 +7,29 @@ Witaj świecie
 Stwórz plik 'hello.py'
 
 ```python
-from flask import Flask, request, send_from_directory, url_for
-import logging
+from flask import Flask, request, send_from_directory
+import json
+
+#
+# Stworz obiekt aplikacji
+#
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
-    return 'Hello, World!'
+def hello():
+  return "Hello world"
+
+if __name__ == '__main__':
+#
+# uruchom aplikacje
+#
+  app.run(host='0.0.0.0', port=5000, debug=True)
 ```
 
 taki program można uruchomić w trybie developerskim za pomocą polecenia:
 
 ```bash
-$ export FLASK_APP=hello.py
-$ flask run
+$ python ./flask_przyklad.py
 ```
 
 Serwowanie plików statycznych (grafiki itp.)
